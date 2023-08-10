@@ -54,8 +54,7 @@
       <h1 id="kitti2tfrecords">Kitti2TFrecords</h1>
 <p>Multiprocessing script for conversion of KITTI dataset to Tensorflow records.</p>
 
-<p>This script is to extract and encode data related to pointcloud, image, calibration and label information as tfrecords. One tfrecord includes 128 samples and has size of around 320 MB. You can specify the number of samples in one tfrecord and you can choose the number of training samples to be encoded. All configuration parameters of the script:
-https://github.com/koraykoca/Kitti2TFrecords/blob/7979b1e1352e780b3aee3ec7d39753046639ea66/kitti2tfrecords.py#L10-L18
+<p>This script is to extract and encode data related to pointcloud, image, calibration and label information as tfrecords. One tfrecord includes 128 samples and has size of around 320 MB. You can specify the number of samples in one tfrecord and you can choose the number of training samples to be encoded. All configuration parameters of the script <a href="https://github.com/koraykoca/Kitti2TFrecords/blob/7979b1e1352e780b3aee3ec7d39753046639ea66/kitti2tfrecords.py#L10-L18">can be found here</a>.
 The 3D bounding box elements are encoded in this order:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">rotation</span><span class="p">]</span>
 </code></pre></div></div>
@@ -67,7 +66,7 @@ The 3D bounding box elements are encoded in this order:</p>
 </ul>
 
 <h2 id="usage">Usage</h2>
-<p>1) Download the dataset from https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d</p>
+<p>1) Download the dataset from <a href="https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d">cvlibs.net</a>:</p>
 <ul>
   <li>Velodyne point clouds (29 GB): Used as input laser information</li>
   <li>Training labels of the object data set (5 MB): Used as input label</li>
