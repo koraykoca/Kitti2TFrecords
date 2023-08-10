@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="google-site-verification" content="MOS7MyuAqyv5QL2Rgee96lQx51MxWIpG0QmoJUXwSaY" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Kitti2TFrecords | Multiprocessing script for conversion of KITTI point cloud dataset to Tensorflow records</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Kitti2TFrecords" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Multiprocessing script for conversion of KITTI point cloud dataset to Tensorflow records" />
+<meta property="og:description" content="Multiprocessing script for conversion of KITTI point cloud dataset to Tensorflow records" />
+<link rel="canonical" href="https://koraykoca.github.io/Kitti2TFrecords/" />
+<meta property="og:url" content="https://koraykoca.github.io/Kitti2TFrecords/" />
+<meta property="og:site_name" content="Kitti2TFrecords" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Kitti2TFrecords" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Multiprocessing script for conversion of KITTI point cloud dataset to Tensorflow records","headline":"Kitti2TFrecords","name":"Kitti2TFrecords","url":"https://koraykoca.github.io/Kitti2TFrecords/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/Kitti2TFrecords/assets/css/style.css?v=8fe152dc7ceb732eab7731deeb045f5cada31a8b">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Kitti2TFrecords/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+
+      <h1 id="kitti2tfrecords">Kitti2TFrecords</h1>
+<p>Multiprocessing script for conversion of KITTI dataset to Tensorflow records.</p>
+
+<p>This script is to extract and encode data related to pointcloud, image, calibration and label information as tfrecords. One tfrecord includes 128 samples and has size of around 320 MB. You can specify the number of samples in one tfrecord and you can choose the number of training samples to be encoded. All configuration parameters of the script:
+https://github.com/koraykoca/Kitti2TFrecords/blob/7979b1e1352e780b3aee3ec7d39753046639ea66/kitti2tfrecords.py#L10-L18
+The 3D bounding box elements are encoded in this order:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">rotation</span><span class="p">]</span>
+</code></pre></div></div>
+<p>The order can be easily modified in the function <a href="https://github.com/koraykoca/Kitti2TFrecords/blob/7979b1e1352e780b3aee3ec7d39753046639ea66/tfrecordsutils.py#L55">get_bbox3d()</a>.</p>
+
+<ul>
+  <li>The converted dataset can be loaded using <a href="https://www.tensorflow.org/api_docs/python/tf/data/TFRecordDataset">TFRecord dataset</a>.</li>
+  <li>An example/test function <a href="https://github.com/koraykoca/Kitti2TFrecords/blob/7979b1e1352e780b3aee3ec7d39753046639ea66/kitti2tfrecords.py#L333">convert_from_tfrecords()</a> is also available to parse the encoded tfrecord data.</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+<p>1) Download the dataset from https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d</p>
+<ul>
+  <li>Velodyne point clouds (29 GB): Used as input laser information</li>
+  <li>Training labels of the object data set (5 MB): Used as input label</li>
+  <li>Camera calibration matrices of the object data set (16 MB): For synchronizing images and point clouds, for cropping point clouds, for projection from camera to point cloud coordinate, for visualizing the predictions</li>
+  <li>Left color images of the object data set (12 GB): For cropping point clouds, for projection from camera to point cloud coordinate, for visualizing the predictions</li>
+</ul>
+
+<p>2) Unzip the files into a folder. Write their directories into the kitti2tfrecord.py and run the script to convert the dataset into TF records!</p>
+
+<p>NOTE: You can crop the point cloud data using <a href="https://github.com/qianguih/voxelnet/blob/master/data/crop.py">this script</a>, because the point clouds are scanned in 360 degrees while the RGB cameras are not (they have a much narrower field of view). In addition, KITTI only provides labels for objects that are within the images. Therefore, we usually need to remove points outside the image coordinates. If you convert the cropped data, then one tfrecord will be around 125 MB.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
